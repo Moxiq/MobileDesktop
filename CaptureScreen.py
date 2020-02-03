@@ -3,20 +3,22 @@ import cv2
 import mss
 import mss.tools
 
+
 class Capture:
 
     def __init__(self):
         self.width = 1920
         self.height = 1080
-        self.left_padding = 500
-        self.top_padding = 500
+        self.left_padding = 0
+        self.top_padding = 0
 
     def get_screen_image(self):
         recording_box = {'top': self.top_padding, 'left': self.left_padding, 'width': self.width, 'height': self.height}
 
         with mss.mss() as sct:
+            sct.compression_level = 1
             sct_img = sct.grab(recording_box)
-            # Return as jpg image in bytes
+            # Return as png image
             return mss.tools.to_png(sct_img.rgb, sct_img.size)
 
     def show_local_stream(self):
