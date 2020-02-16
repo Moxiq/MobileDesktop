@@ -8,7 +8,7 @@ from io import BytesIO, StringIO
 
 class Capture:
 
-    def __init__(self, quality=50, width=1920, height=1080, left_pad=0, right_pad=0):
+    def __init__(self, quality=10, width=1920, height=1080, left_pad=0, right_pad=0):
         # Quality is an integer between 0-100
         self.quality = quality
         self.width = width
