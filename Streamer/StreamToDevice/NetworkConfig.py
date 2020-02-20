@@ -14,6 +14,6 @@ class NetworkConnection:
         self.socket.listen()
         return self.socket.accept()
 
-    def recieve_data(self):
-        data = self.socket.recv(4096).decode("utf-8")
+    def receive_data(self, connection_socket):
+        data = connection_socket.recv(1024).decode("utf-8")
         return data
