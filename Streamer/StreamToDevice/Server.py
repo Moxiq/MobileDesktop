@@ -2,7 +2,7 @@
 from importlib import import_module
 import os
 from flask import Flask, render_template, Response
-from CaptureScreen import Capture
+from Streamer.StreamToDevice.CaptureScreen import Capture
 
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera

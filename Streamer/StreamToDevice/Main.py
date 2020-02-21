@@ -1,6 +1,6 @@
-from NetworkConfig import NetworkConnection
+from Streamer.StreamToDevice.NetworkConfig import NetworkConnection
 from time import sleep
-from CommandClicker import CommandClicker
+from Streamer.StreamToDevice.CommandClicker import CommandClicker
 import ctypes
 
 # input("Press any key to start")
