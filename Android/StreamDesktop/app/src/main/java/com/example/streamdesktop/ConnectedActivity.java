@@ -1,18 +1,14 @@
 package com.example.streamdesktop;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.example.streamdesktop.Mjpeg.MjpegInputStream;
 import com.example.streamdesktop.Mjpeg.MjpegView;
@@ -22,10 +18,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 
 public class ConnectedActivity extends Activity {
-    private String url = "http://192.168.0.34:5000/video_feed";
+    private String url = "http://192.168.0.41:5034/video_feed";
     private MjpegView mv;
     private Connection con;
     private final BlockingQueue<String> inputBuf = new LinkedBlockingQueue<String>();
+
+    private ImageView imgDesk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +35,10 @@ public class ConnectedActivity extends Activity {
         StrictMode.setThreadPolicy(policy);
 
         mv = (MjpegView) findViewById(R.id.mjpegview);
+        imgDesk = (ImageView) findViewById(R.id.img_desk);
 
-        con = new Connection("192.168.0.34", 10000);
+
+        con = new Connection("192.168.0.41", 10000);
         if (con.requestConnection()) {
             mv.setDisplayMode(MjpegView.SIZE_BEST_FIT);
             mv.showFps(false);
@@ -69,6 +69,13 @@ public class ConnectedActivity extends Activity {
                 con.sendString(x + "," + y);
                 //con.sendString((int)mv.getWidth() + "," + (int)mv.getHeight());
                 return false;
+            }
+        });
+
+        imgDesk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                con.sendString("100,100");
             }
         });
     }

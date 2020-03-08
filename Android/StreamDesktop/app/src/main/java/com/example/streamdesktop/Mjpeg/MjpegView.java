@@ -12,6 +12,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.view.ScaleGestureDetector;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -41,13 +42,19 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
     private int dispHeight;
     private int displayMode;
 
+    //Zoom
+    private ScaleGestureDetector mScaleDetector;
+    private float mScaleFactor = 1.f;
+
     public class MjpegViewThread extends Thread {
         private SurfaceHolder mSurfaceHolder;
         private int frameCounter = 0;
         private long start;
         private Bitmap ovl;
 
-        public MjpegViewThread(SurfaceHolder surfaceHolder, Context context) { mSurfaceHolder = surfaceHolder; }
+        public MjpegViewThread(SurfaceHolder surfaceHolder, Context context) {
+            mSurfaceHolder = surfaceHolder;
+        }
 
         private Rect destRect(int bmw, int bmh) {
             int tempx;
@@ -216,4 +223,6 @@ public class MjpegView extends SurfaceView implements SurfaceHolder.Callback {
         super.performClick();
         return true;
     }
+
+
 }
