@@ -1,6 +1,6 @@
-from Streamer.StreamToDevice.NetworkConfig import NetworkConnection
+from NetworkConfig import NetworkConnection
 from time import sleep
-from Streamer.StreamToDevice.CommandClicker import CommandClicker
+from CommandClicker import CommandClicker
 import ctypes
 
 # input("Press any key to start")
@@ -16,6 +16,7 @@ while 1:
     xy_pos = tcp.receive_data(tcp_socket)
     x = int(xy_pos.split(",")[0])
     y = int(xy_pos.split(",")[1])
+    print(str(x) + str(y))
     CommandClicker.click_xy(x, y)
 
 

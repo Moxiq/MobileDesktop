@@ -2,7 +2,7 @@
 from importlib import import_module
 import os
 from flask import Flask, render_template, Response
-from Streamer.StreamToDevice.CaptureScreen import Capture
+from CaptureScreen import Capture
 
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera
@@ -47,4 +47,4 @@ def video_feed():
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.34', port=5000)
+    app.run(host='192.168.0.41', port=5034)
