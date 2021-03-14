@@ -5,7 +5,7 @@ from time import sleep
 class NetworkConnection:
 
     def __init__(self):
-        self.server_address = ("192.168.0.41", 10000)
+        self.server_address = (socket.gethostbyname(socket.gethostname()), 10000)
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.buffer = 4096
 

@@ -3,6 +3,7 @@ from importlib import import_module
 import os
 from flask import Flask, render_template, Response
 from CaptureScreen import Capture
+import socket
 
 # Raspberry Pi camera module (requires picamera package)
 # from camera_pi import Camera
@@ -47,4 +48,6 @@ def video_feed():
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.0.41', port=5034)
+    hostname = socket.gethostname()
+    IPAddr = socket.gethostbyname(hostname)
+    app.run(host=IPAddr, port=5034)

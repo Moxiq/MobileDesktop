@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.streamdesktop.Mjpeg.SettingsActivity;
+
 import java.net.Socket;
 
 public class MainActivity extends Activity {
-    private boolean isConnected = false;
-    Socket socket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,11 +18,20 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         Button btnConnect = findViewById(R.id.btnConnect);
+        Button btnSettings = findViewById(R.id.btnSettings);
 
         btnConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(MainActivity.this, ConnectedActivity.class);
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
+
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(MainActivity.this, SettingsActivity.class);
                 MainActivity.this.startActivity(myIntent);
             }
         });

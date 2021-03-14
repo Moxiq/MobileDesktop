@@ -3,8 +3,11 @@ package com.example.streamdesktop;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -18,10 +21,12 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 
 public class ConnectedActivity extends Activity {
-    private String url = "http://192.168.0.41:5034/video_feed";
+    private SharedPreferences sp;
+    private String hostIp;
+    private String hostPort;
+    private String url;
     private MjpegView mv;
     private Connection con;
-    private final BlockingQueue<String> inputBuf = new LinkedBlockingQueue<String>();
 
     private ImageView imgDesk;
 
@@ -34,11 +39,16 @@ public class ConnectedActivity extends Activity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        this.hostIp = sp.getString("hostIP", "192.168.0.33");
+        this.hostPort = sp.getString("hostPort", "5034");
+        this.url = String.format("http://%s:%s/video_feed", hostIp, hostPort);
+
         mv = (MjpegView) findViewById(R.id.mjpegview);
         imgDesk = (ImageView) findViewById(R.id.img_desk);
 
 
-        con = new Connection("192.168.0.41", 10000);
+        con = new Connection(this.hostIp, 10000);
         if (con.requestConnection()) {
             mv.setDisplayMode(MjpegView.SIZE_BEST_FIT);
             mv.showFps(false);

@@ -18,5 +18,3 @@ while 1:
     y = int(xy_pos.split(",")[1])
     print(str(x) + str(y))
     CommandClicker.click_xy(x, y)
-
-

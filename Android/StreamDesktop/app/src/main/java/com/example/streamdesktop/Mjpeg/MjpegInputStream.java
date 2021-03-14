@@ -15,6 +15,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 /**
  * Author: https://stackoverflow.com/questions/3205191/android-and-mjpeg
@@ -35,7 +36,10 @@ public class MjpegInputStream extends DataInputStream {
             res = httpclient.execute(new HttpGet(URI.create(url)));
             return new MjpegInputStream(res.getEntity().getContent());
         } catch (ClientProtocolException e) {
-        } catch (IOException e) {}
+            Log.e("EXCE", "ClientProtocolException");
+        } catch (IOException e) {
+            Log.e("EXCE", e.getMessage());
+        }
         return null;
     }
 
